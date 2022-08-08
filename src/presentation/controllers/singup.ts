@@ -1,5 +1,7 @@
+import { HttpRequest, HttpResponse } from '../protocols/http'
+
 export class SingUpController {
-  handle (httpRequest: any): any {
+  handle (httpRequest: HttpRequest): HttpResponse {
     const { name, email } = httpRequest.body
     if (!name) {
       return {
@@ -12,6 +14,10 @@ export class SingUpController {
         statusCode: 400,
         body: new Error('Missing param: email')
       }
+    }
+    return {
+      statusCode: 200,
+      body: ''
     }
   }
 }
