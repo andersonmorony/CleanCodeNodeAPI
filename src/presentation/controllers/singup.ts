@@ -11,12 +11,15 @@ export class SingUpController implements Controller {
 
   handle (httpRequest: HttpRequest): HttpResponse {
     try {
-      const { email } = httpRequest.body
+      const { email, password, passwordConfirmation } = httpRequest.body
       const RequiredField = ['name', 'email', 'password', 'passwordConfirmation']
       for (const field of RequiredField) {
         if (!httpRequest.body[field]) {
           return badRequest(new MissParamError(field))
         }
+      }
+      if (password !== passwordConfirmation) {
+        return badRequest(new InvalidParamError('passwordConfirmation'))
       }
       const isValid = this.emailValidator.isValid(email)
       if (!isValid) {
