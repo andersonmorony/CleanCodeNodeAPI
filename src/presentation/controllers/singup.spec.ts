@@ -43,4 +43,18 @@ describe('SingUp Controller', () => {
     const httpResponse = sut.handle(httpRequest)
     expect(httpResponse.statusCode).toBe(200)
   })
+
+  test('Should return 400 if password no provided', () => {
+    const sut = new SingUpController()
+    const httpRequest = {
+      body: {
+        name: 'any_name',
+        email: 'any_mail',
+        passwordConfirmation: 'any_password'
+      }
+    }
+    const httpResponse = sut.handle(httpRequest)
+    expect(httpResponse.statusCode).toBe(400)
+    expect(httpResponse.body).toEqual(new MissParamError('password'))
+  })
 })
