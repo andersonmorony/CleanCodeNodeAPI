@@ -11,13 +11,13 @@ export class SingUpController implements Controller {
 
   handle (httpRequest: HttpRequest): HttpResponse {
     try {
-      const { email, password, passwordConfirmation } = httpRequest.body
       const RequiredField = ['name', 'email', 'password', 'passwordConfirmation']
       for (const field of RequiredField) {
         if (!httpRequest.body[field]) {
           return badRequest(new MissParamError(field))
         }
       }
+      const { email, password, passwordConfirmation } = httpRequest.body
       if (password !== passwordConfirmation) {
         return badRequest(new InvalidParamError('passwordConfirmation'))
       }
