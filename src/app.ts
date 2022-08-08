@@ -1,5 +1,5 @@
 const a = (): string => {
-  return 'hello'
+  return 'hellos'
 }
 
 module.exports = a
