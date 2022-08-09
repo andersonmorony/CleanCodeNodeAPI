@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "lint": "eslint ./src",
+    "prepare": "husky install",
     "lintstaged": "lint-staged",
-    "test": "jest",
-    "test:watch": "jest --watch",
-    "test:staged": "jest --passWithNoTests",
-    "prepare": "husky install"
+    "test": "jest --passWithNoTests --silent --noStackTrace --runInBand --no-cache",
+    "test:complete": "jest --passWithNoTests --runInBand",
+    "test:unit": "npm test -- --watch -c jest-unit.config.js",
+    "test:integration": "npm test -- --watch -c jest-integration.config.js",
+    "test:staged": "npm test -- --passWithNoTests --findRelatedTests",
+    "test:ci": "npm test -- --coverage"
   },
   "keywords": [],
   "author": "",
