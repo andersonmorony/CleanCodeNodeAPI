@@ -10,8 +10,12 @@ describe('Account Mongo Repository', () => {
     await MongoHelper.disconnect()
   })
 
+  const makeSut = (): AccountMongoReposiroty => {
+    return new AccountMongoReposiroty()
+  }
+
   test('Should return an account on success', async () => {
-    const sut = new AccountMongoReposiroty()
+    const sut = makeSut()
     const account = await sut.add({
       name: 'valid_name',
       email: 'valid_email',
