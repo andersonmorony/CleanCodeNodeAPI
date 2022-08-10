@@ -1,7 +1,11 @@
-import { Router, Response, Request } from 'express'
+/* eslint-disable @typescript-eslint/no-misused-promises */
+import { Router } from 'express'
+import { makeSingUpController } from '../factories/singup'
+import { adaptRoute } from '../adapters/express-route-adapter'
 
 export default (router: Router): void => {
-  router.post('/singup', (req: Request, res: Response) => {
-    res.json({ ok: 'ok' })
+  router.post('/singup', adaptRoute(makeSingUpController()))
+  router.get('/singup', (req, res) => {
+    res.send('oi')
   })
 }
